@@ -64,7 +64,7 @@ for col_name in df_spark.columns:
     df_spark = df_spark.withColumnRenamed(col_name, new_name)
 
 # Add ingestion metadata
-df_final = df_spark.withColumn("ingestion_timestamp", current_timestamp)
+df_final = df_spark.withColumn("ingestion_timestamp", current_timestamp())
 
 # Save to Databricks
 target_table = "wallstreet_bronze.raw_stocks"
