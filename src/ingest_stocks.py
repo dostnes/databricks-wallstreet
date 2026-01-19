@@ -1,3 +1,20 @@
+import sys
+import subprocess
+import importlib
+
+# Ensure required packages are installed
+def install_and_import(package_name):
+    try:
+        importlib.import_module(package_name)
+    except ImportError:
+        print(f"Installing package: {package_name}")
+        subprocess.check_call([sys.executable, "-m", "pip", "install", package_name])
+        print(f"Package {package_name} installed successfully.")
+
+        importlib.invalidate_caches()
+
+install_and_import("yfinance")
+
 import yfinance as yf
 import pandas as pd
 from pyspark.sql import SparkSession
