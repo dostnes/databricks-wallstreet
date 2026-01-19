@@ -6,12 +6,12 @@
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
 
 ## 📖 Om Prosjektet
-Dette er en **Hybrid ELT-pipeline** designet for å hente finansiell data ("The Magnificent Seven" + OSEBX) og ingestene dette til **Databricks Bronze Layer**.
+Dette er en **Hybrid ELT-pipeline** designet for å hente finansiell data ("The Magnificent Seven" + OSEBX) og ingeste dette til **Databricks Bronze Layer**.
 
 Prosjektet demonstrerer moderne "Best Practices" for Databricks-utvikling, inkludert:
 * **Programmatisk avhengighetshåndtering:** Scriptet sjekker og installerer `yfinance` automatisk ved kjøring.
-* **Governance & Code Quality:** Bruker **Ruff** for lynrask linting/formatering og **Pre-commit hooks** for å sikre kodestandard før opplasting.
-* **Datakvalitet:** Håndterer og standardiserer tidsserier fra Yahoo Finance API.
+* **Governance & Code Quality:** Bruker **Ruff** for linting/formatering og **Pre-commit hooks** for å sikre kodestandard før opplasting.
+* **Datakvalitet:** Håndterer Yahoo Finance API data for å få det inn i Databricks.
 
 ## 🛠️ Teknologistack
 * **Compute:** Databricks (Community Edition)
