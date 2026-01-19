@@ -5,6 +5,7 @@ from pyspark.sql.functions import col, current_timestamp, to_date
 SOURCE_TABLE = "wallstreet_bronze.raw_stocks"
 TARGET_TABLE = "wallstreet_bronze.silver_stocks"
 
+
 def transform_silver():
     spark = SparkSession.builder.appName("WallStreetSilver").getOrCreate()
 
@@ -16,21 +17,21 @@ def transform_silver():
     # 2. Fjern eventuelle duplikater
     # 3. Beregn en enkel 'daglig endring' (diff mellom high og low)
 
-    df_transformed = df \
-        .withColumn("transaction_date", to_date(col("transaction_date"))) \
-        .withColumn("daily_spread", col("high") - col("low")) \
-        .drop_duplicates(["ticker", "transaction_date"]) \
+    df_transformed = (
+        df.withColumn("transaction_date", to_date(col("transaction_date")))
+        .withColumn("daily_spread", col("high") - col("low"))
+        .drop_duplicates(["ticker", "transaction_date"])
         .withColumn("processed_timestamp", current_timestamp())
+    )
 
     print(f"Writing to {TARGET_TABLE}...")
 
-    df_transformed.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .option("mergeSchema", "true") \
-        .saveAsTable(TARGET_TABLE)
+    df_transformed.write.format("delta").mode("overwrite").option(
+        "mergeSchema", "true"
+    ).saveAsTable(TARGET_TABLE)
 
     print("✅ Silver transformation complete!")
+
 
 if __name__ == "__main__":
     transform_silver()
