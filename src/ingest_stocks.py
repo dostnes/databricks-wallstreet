@@ -39,16 +39,22 @@ def fetch_stock_data(tickers):
     for ticker in tickers:
         try:
             df_ticker = data[ticker].copy()
-            df_ticker.reset_index()
-            df_ticker['Ticker'] = ticker
+
+            if df_ticker.empty:
+                print(f"No data found for ticker: {ticker}")
+                continue
+            
+            if 'Date' in df_ticker.columns:
+                df_ticker = df_ticker.rename(columns={'Date': 'date'})
+            else:
+                df_ticker.columns_values[0] = 'date'
+            
+            df_ticker["ticker"] = ticker
+
             all_stocks.append(df_ticker)
-        except KeyError:
-            print(f"Data for ticker {ticker} not found in the downloaded data.")
         
-    if all_stocks:
-        return pd.concat(all_stocks)
-    else:
-        return pd.DataFrame()
+        except Exception as e:
+            print(f"Error processing ticker {ticker}: {e}")
 
 # Main ingestion function
 pdf = fetch_stock_data(TICKERS)
