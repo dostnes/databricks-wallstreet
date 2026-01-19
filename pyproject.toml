@@ -1,0 +1,24 @@
+[tool.ruff]
+# Vi forteller Ruff at disse variablene finnes i miljøet vårt (Databricks)
+builtins = ["display", "spark", "dbutils"]
+
+# Hvor lang skal en linje være før den brytes?
+line-length = 88
+
+[tool.ruff.lint]
+# Her velger vi hvilke regler vi vil følge
+select = [
+    "E",   # pycodestyle errors
+    "F",   # Pyflakes
+    "W",   # pycodestyle warnings
+    "I",   # isort (sortering av imports)
+]
+
+# Her ignorerer vi regler som krasjer med vårt "Auto-install"-opplegg
+ignore = [
+    "E402", # Module level import not at top of file (Må ignoreres pga install_and_import funksjonen)
+]
+
+[tool.ruff.lint.isort]
+# Sørger for at imports ser pene ut
+combine-as-imports = true

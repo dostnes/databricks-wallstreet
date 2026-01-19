@@ -1,0 +1,23 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.14
+    hooks:
+      # Run the linter (finner feil)
+      - id: ruff
+        args: [ --fix ]
+      # Run the formatter (gjør koden pen)
+        # Vi kan bruke ruff-format også, eller bare la ruff fikse det meste.
+        # La oss bruke ruff sin formatter:
+      - id: ruff-format
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      # Sjekker at yaml-filer er gyldige
+      - id: check-yaml
+      # Hindrer at du committer store filer (over 500kb) ved uhell
+      - id: check-added-large-files
+      # Fikser slutten av filer (legger til en tom linje)
+      - id: end-of-file-fixer
+      # Fjerner whitespace på slutten av linjer
+      - id: trailing-whitespace

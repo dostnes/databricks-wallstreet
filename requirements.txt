@@ -1,3 +1,5 @@
 yfinance
 pandas
 pyspark
+ruff
+pre-commit
