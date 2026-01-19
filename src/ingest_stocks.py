@@ -55,6 +55,8 @@ def fetch_stock_data(tickers):
         
         except Exception as e:
             print(f"Error processing ticker {ticker}: {e}")
+    
+    return all_stocks
 
 # Main ingestion function
 pdf = fetch_stock_data(TICKERS)
